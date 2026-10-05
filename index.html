@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 9 Mock Interview: Watch, Spot, and Practice</title>
+<style>
+:root{--forest:#013220;--gold:#C6A15B;--ivory:#F8F5E9;--char:#333333;--gray:#7B7B7B;--sage:#A3B18A;--coral:#D97A6A;--sky:#89B6A5;--sageT:#E4EADA;--coralT:#F7E0DB;--skyT:#DCEBE5}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{font-size:100%;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--ivory);color:var(--char);font-family:Verdana,"DejaVu Sans",Geneva,sans-serif;font-size:1.125rem;line-height:1.6}
+.site-header{background:var(--forest);color:#fff;border-bottom:6px solid var(--gold);padding:1.25rem 1rem}
+.site-header .inner,main,.site-footer{max-width:46rem;margin:0 auto}
+.course{margin:0 0 .25rem;font-size:1rem;font-weight:bold;letter-spacing:.04em;text-transform:uppercase;color:var(--gold)}
+h1{margin:0;font-size:1.75rem;line-height:1.25;color:#fff}
+main{padding:1.25rem 1rem 2rem}
+.intro{margin:0 0 1.25rem}
+.card{background:#fff;border:2px solid var(--sage);border-radius:14px;padding:1.25rem}
+h2{margin:0 0 .5rem;font-size:1.25rem;line-height:1.3;color:var(--forest)}
+h2:focus,.feedback:focus{outline:3px solid var(--forest);outline-offset:4px}
+.progress-text{margin:0 0 .5rem;font-weight:bold;color:var(--forest)}
+.bar{height:.75rem;background:var(--sageT);border:1px solid var(--sage);border-radius:99px;margin-bottom:1rem;overflow:hidden}
+.bar span{display:block;height:100%;background:var(--forest)}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+legend{padding:0;margin:0 0 1rem;font-size:1.25rem;font-weight:bold;line-height:1.4;color:var(--char)}
+.opt{display:flex;align-items:flex-start;gap:.75rem;margin:0 0 .75rem;padding:.85rem 1rem;border:2px solid var(--gray);border-radius:10px;background:#fff;min-height:3rem}
+.opt:hover{background:var(--skyT)}
+.opt.selected{border-color:var(--forest);border-width:3px;padding:calc(.85rem - 1px) calc(1rem - 1px);background:var(--skyT)}
+.opt:focus-within{outline:3px solid var(--forest);outline-offset:3px}
+.opt input{flex:none;width:1.5rem;height:1.5rem;margin:.15rem 0 0;accent-color:var(--forest)}
+.opt label{flex:1;cursor:pointer;display:block}
+.opt.is-correct{background:var(--sageT);border-color:var(--forest);border-width:3px}
+.opt.is-wrong{background:var(--coralT);border-color:var(--coral);border-width:3px}
+.badge{display:inline-block;margin-top:.35rem;padding:.1rem .6rem;border:2px solid var(--forest);border-radius:99px;background:#fff;font-size:1rem;font-weight:bold;color:var(--forest)}
+.badge.wrong{border-color:var(--char);color:var(--char)}
+.opt-label-text{display:block}
+.btnrow{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1rem}
+button{font:inherit;font-size:1.0625rem;font-weight:bold;min-height:3rem;padding:.6rem 1.25rem;border-radius:10px;cursor:pointer;border:3px solid var(--forest)}
+.primary{background:var(--forest);color:#fff}
+.primary:hover{background:#024a30}
+.secondary{background:#fff;color:var(--forest)}
+.secondary:hover{background:var(--skyT)}
+button:focus-visible{outline:3px solid var(--forest);outline-offset:3px;box-shadow:0 0 0 7px var(--gold)}
+.error{margin:.75rem 0 0;font-weight:bold;color:var(--char)}
+.error:not(:empty){padding:.75rem 1rem;background:var(--coralT);border-left:8px solid var(--coral);border-radius:0 8px 8px 0}
+.hint{margin:1rem 0 0;padding:.75rem 1rem;background:var(--skyT);border-left:8px solid var(--forest);border-radius:0 8px 8px 0}
+.hint[hidden]{display:none}
+.feedback{margin-top:1.25rem;padding:1rem 1.25rem;border-radius:0 10px 10px 0;border-left:10px solid var(--forest);background:var(--sageT)}
+.feedback.bad{border-left-color:var(--coral);background:var(--coralT)}
+.feedback .fb-title{margin:0 0 .35rem;font-size:1.25rem;font-weight:bold;color:var(--forest)}
+.feedback p{margin:0 0 .5rem}
+.feedback p:last-child{margin-bottom:0}
+.score{font-size:1.25rem;font-weight:bold;color:var(--forest)}
+.review{list-style:none;margin:1rem 0 0;padding:0}
+.review li{margin:0 0 1rem;padding:1rem;border:2px solid var(--sage);border-radius:10px;background:#fff}
+.review h3{margin:0 0 .35rem;font-size:1.125rem;color:var(--forest)}
+.review p{margin:0 0 .35rem}
+.review p:last-child{margin-bottom:0}
+.site-footer{padding:0 1rem 2rem;font-size:1rem}
+.skip{position:absolute;left:-999px;top:0;background:#fff;color:var(--forest);padding:.5rem 1rem;font-weight:bold;border:3px solid var(--forest)}
+.skip:focus{left:.5rem;top:.5rem;z-index:10}
+noscript p{padding:1rem;background:var(--coralT);border-left:8px solid var(--coral)}
+@media (max-width:30rem){h1{font-size:1.5rem}.card{padding:1rem}}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+@media (forced-colors:active){button{border:2px solid ButtonText}.opt,.card,.feedback,.hint{border:2px solid CanvasText}}
+
+.stepper{margin:0 0 1rem}
+.line{margin:0 0 .75rem;padding:.75rem 1rem;border-left:8px solid var(--forest);border-radius:0 10px 10px 0;background:#fff}
+.line.cand{border-left-color:var(--gold);background:var(--ivory)}
+.speaker{display:block;font-weight:bold;color:var(--forest)}
+.stage{font-style:italic;margin:0 0 .75rem}
+.setup{margin:0 0 1rem}
+.seg{margin:0 0 .75rem;padding:.75rem 1rem;border:2px solid var(--forest);border-radius:10px;background:var(--sageT)}
+.seg .tagname{display:inline-block;margin-bottom:.25rem;padding:.1rem .7rem;border-radius:99px;background:var(--forest);color:#fff;font-weight:bold;font-size:1rem}
+.seg p{margin:0}
+.group{margin:0 0 1.25rem;padding:0}
+.group legend{font-size:1.125rem}
+.inline{display:flex;flex-wrap:wrap;gap:.5rem}
+.inline .opt{margin:0;flex:1 1 7rem}
+.nav{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.5rem;padding-top:1rem;border-top:2px solid var(--sageT)}
+.nav .spacer{flex:1}
+label.fieldlabel{display:block;font-weight:bold;margin:0 0 .25rem;color:var(--forest)}
+textarea,select{width:100%;font:inherit;font-size:1.0625rem;color:var(--char);background:#fff;border:2px solid var(--gray);border-radius:10px;padding:.6rem .75rem}
+textarea{min-height:5.5rem;resize:vertical}
+textarea:focus,select:focus{outline:3px solid var(--forest);outline-offset:2px}
+.timer{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem;margin:1rem 0;padding:1rem;background:var(--skyT);border-left:8px solid var(--forest);border-radius:0 10px 10px 0}
+.time{font-size:2rem;font-weight:bold;color:var(--forest);min-width:5rem}
+.list{margin:0 0 1rem;padding-left:1.5rem}
+.list li{margin:0 0 .35rem}
+.result-list{list-style:none;margin:.5rem 0 0;padding:0}
+.result-list li{margin:0 0 .5rem}
+.status{margin:.75rem 0 0;font-weight:bold;color:var(--forest)}
+.copybox{margin-top:.75rem}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the activity</a>
+<header class="site-header"><div class="inner">
+<p class="course">Fresh Start Job Readiness Course</p>
+<h1>Module 9 Mock Interview: Watch, Spot, and Practice</h1>
+</div></header>
+<main id="main">
+<p class="intro">Read a short mock interview for a nursing assistant job. The people and the employer are fictional. You will do a few quick tasks, then practice your own answers. This is for practice and is not graded.</p>
+<div class="card"><div id="app">
+<noscript><p>This activity needs JavaScript. Please use the downloadable text version instead.</p></noscript>
+</div></div>
+</main>
+<footer class="site-footer"><p>Practice activity for the Fresh Start Job Readiness Course.</p></footer>
+<script type="application/json" id="content">{"title":"Module 9 Mock Interview: Watch, Spot, and Practice","intro":"Read a short mock interview for a nursing assistant job. The people and the employer are fictional. You will do a few quick tasks, then practice your own answers. This is for practice and is not graded.","s1":{"title":"Tell me about yourself","setup":"Ms. Brooks is the interviewer. Maria is applying for an entry-level nursing assistant job at Example Valley Care Center.","lines":[{"who":"Ms. Brooks","text":"Thank you for coming in today, Maria. Please, have a seat. Let's start with a simple one. Tell me about yourself."},{"stage":"Maria nods and smiles. Her printed resume is on the table."}],"answerIntro":"Here is Maria's answer, one sentence at a time.","opener":"Thank you for having me.","parts":[{"text":"I have been caring for a family member for the past two years, managing her medications and her medical appointments.","ans":"Past","why":"It describes experience she has already had."},{"text":"Before that, I worked as a cashier at a grocery store, where I learned to serve people patiently and accurately.","ans":"Past","why":"It describes an earlier job."},{"text":"Right now I have just completed a nursing assistant training program at Example Community College, and I volunteer at a food bank every month.","ans":"Present","why":"It tells what she is doing now: her training and her volunteering."},{"text":"I would love to start my career as a nursing assistant in a setting like yours, where I can keep learning and help residents feel comfortable and respected.","ans":"Future","why":"It tells what she hopes to do next."}],"task":"For each sentence, choose whether it is about Maria's past, present, or future.","wrap":"A strong answer to \"Tell me about yourself\" has a past, a present, and a future, and it stays under about 90 seconds. This answer is about 100 words, which takes well under a minute to say."},"s2":{"title":"A team question: what is missing?","lines":[{"who":"Ms. Brooks","text":"Thank you. Next, tell me about a time you worked as part of a team."},{"stage":"Maria pauses for a moment before answering."},{"who":"Maria","text":"Well, I worked at a restaurant, and it was really busy one night. We had a big group come in. It was stressful, but we got through it."},{"stage":"Ms. Brooks gives a polite nod but has no follow-up."}],"task":"Select every part of STAR that is missing or vague in this answer.","parts":[{"k":"S","name":"Situation","ask":"What was happening?","missing":false,"why":"Present. We learn it was a busy night and a big group came in."},{"k":"T","name":"Task","ask":"What was your responsibility?","missing":true,"why":"Vague. Maria does not say what her own role was."},{"k":"A","name":"Action","ask":"What did you do?","missing":true,"why":"Missing. We do not hear anything she actually did."},{"k":"R","name":"Result","ask":"What happened?","missing":true,"why":"Missing. \"We got through it\" does not say what the outcome was."}]},"s3":{"title":"The stronger answer","intro":"Here is the same story told with all four parts of STAR. Each part is labeled so you can see it.","segs":[{"name":"Situation","text":"At my last restaurant job, a large group arrived on a busy night, and we were short-staffed."},{"name":"Task","text":"My role was to get food to the tables quickly and keep the dining room clear."},{"name":"Action","text":"I checked in with the cook so I knew which dishes were next, and I cleared tables as I passed so the servers could keep moving."},{"name":"Result","text":"The whole group was served on time, and the manager thanked our team for staying calm."}],"notice":["Maria says what her own job was.","She says \"I\" when she describes what she did, so the interviewer hears her actions.","She ends with a clear result."],"note":"Details such as a manager's thanks are examples. In your own answers, use only things that really happened."},"s4":{"title":"Your questions for the employer","lines":[{"who":"Ms. Brooks","text":"That is helpful, thank you. Do you have any questions for us?"},{"stage":"Maria opens her notebook."},{"who":"Maria","text":"Yes. What does a typical day look like for someone in this role? And what are the next steps in the hiring process?"},{"stage":"Maria writes down the answer."}],"task":"Select the questions that are good to ask an employer in an interview.","opts":[{"text":"What does a typical day look like for someone in this role?","good":true,"why":"It shows you are thinking about the work itself."},{"text":"What qualities do your most successful employees share?","good":true,"why":"It shows you want to do well."},{"text":"What opportunities are there for growth or training?","good":true,"why":"It shows you want to keep learning."},{"text":"What are the next steps in the hiring process?","good":true,"why":"It shows you are serious, and it tells you what to expect."},{"text":"How much do you earn?","good":false,"why":"This is personal and does not show interest in the job."},{"text":"Can I leave early on Fridays?","good":false,"why":"It is better to show interest in the job first."}],"wrap":"Always have questions prepared. After the interview, send a short thank-you email within 24 hours. Thank them for their time, mention something specific from the conversation, and say you are still interested."},"s5":{"title":"Your turn: practice","intro":"Choose a question and plan your answer. Say it out loud if you can. Nothing you type on this page is saved or sent anywhere. If you close the page, your notes are gone, so use Copy my notes to keep them.","questions":[{"q":"Tell me about yourself.","kind":"Past, Present, and Future","fields":["Past: my background and experience","Present: what I am doing now","Future: what I want and why this job"]},{"q":"Why do you want to work here?","kind":"Your interest, an experience, and your goal","fields":["What interests me about this job or field","An experience that made me interested","What I hope to do or achieve"]},{"q":"What are your greatest strengths?","kind":"One strength with a short example","fields":["My strength","A short example of using it"]},{"q":"Tell me about a time you worked as part of a team.","kind":"STAR","star":true},{"q":"Where do you see yourself in two to three years?","kind":"Your goal and how this job helps","fields":["My goal","How this job helps me reach it"]},{"q":"Tell me about a time you took on a new responsibility.","kind":"STAR","star":true},{"q":"Tell me about a time you solved a problem at work.","kind":"STAR","star":true},{"q":"Tell me about a time you dealt with a conflict on a team.","kind":"STAR","star":true}],"starFields":["Situation: what was happening","Task: what was my responsibility","Action: what I did","Result: what happened"],"timerNote":"Optional timer: about 90 seconds works well for \"Tell me about yourself,\" and one to two minutes for a story.","checklist":["I told a real story, not a general statement.","My answer had all four STAR parts (when it was a story question).","I said what I did, using \"I,\" not just what the group did.","I ended with a result.","I spoke clearly and at a steady pace.","My answer was the right length.","I used professional language and complete sentences."]},"s6":{"title":"Wrap up","points":["You labeled a strong answer as past, present, and future.","You spotted what makes a story answer weak, and what makes it strong.","You chose good questions to ask an employer.","You practiced your own answer."],"next":["Practice out loud. Record yourself on your phone and listen once. Try again.","Use real stories, paid or unpaid. Caregiving counts as real experience.","Bring printed copies of your resume and arrive 10 to 15 minutes early.","Send a thank-you email within 24 hours.","Your counselor or advisor may set up a practice interview with you before the next module."]}}</script>
+<script>
+(function(){
+  var C=JSON.parse(document.getElementById('content').textContent);
+  var app=document.getElementById('app');
+  var TOTAL=6;
+  var state={step:0,
+    s1:{picks:[null,null,null,null],checked:false},
+    s2:{sel:{S:false,T:false,A:false,R:false},checked:false},
+    s4:{sel:[false,false,false,false,false,false],checked:false},
+    s5:{q:0,notes:{},checks:[false,false,false,false,false,false,false]}};
+  var timer={secs:90,id:null,running:false};
+  var replaying=false;
+  function h(tag,props){
+    var e=document.createElement(tag);
+    if(props){for(var k in props){if(k==='text'){e.textContent=props[k];}else if(k==='class'){e.className=props[k];}else{e.setAttribute(k,props[k]);}}}
+    function add(c){if(c==null)return;if(Array.isArray(c)){c.forEach(add);return;}e.appendChild(typeof c==='string'?document.createTextNode(c):c);}
+    for(var i=2;i<arguments.length;i++){add(arguments[i]);}
+    return e;
+  }
+  function stopTimer(){if(timer.id){clearInterval(timer.id);timer.id=null;}timer.running=false;}
+  function go(n,focus){stopTimer();state.step=n;render(focus!==false);}
+  function dialogue(lines){
+    var box=h('div');
+    lines.forEach(function(l){
+      if(l.stage){box.appendChild(h('p',{class:'stage',text:l.stage}));}
+      else{box.appendChild(h('div',{class:'line'+(l.who==='Maria'?' cand':'')},h('span',{class:'speaker',text:l.who+':'}),l.text));}
+    });
+    return box;
+  }
+  function nav(){
+    var row=h('div',{class:'nav'});
+    if(state.step>0){var b=h('button',{type:'button',class:'secondary',text:'Back'});b.addEventListener('click',function(){go(state.step-1);});row.appendChild(b);}
+    row.appendChild(h('span',{class:'spacer'}));
+    if(state.step<TOTAL-1){var n=h('button',{type:'button',class:'primary',text:'Next step'});n.addEventListener('click',function(){go(state.step+1);});row.appendChild(n);}
+    else{var r=h('button',{type:'button',class:'primary',text:'Start over'});r.addEventListener('click',function(){state={step:0,s1:{picks:[null,null,null,null],checked:false},s2:{sel:{S:false,T:false,A:false,R:false},checked:false},s4:{sel:[false,false,false,false,false,false],checked:false},s5:{q:0,notes:{},checks:[false,false,false,false,false,false,false]}};go(0);});row.appendChild(r);}
+    return row;
+  }
+  function feedbackBox(){return h('div',{class:'feedback',id:'feedback',tabindex:'-1',hidden:'hidden'});}
+  function showFeedback(fb,bad,title,nodes){
+    fb.className='feedback'+(bad?' bad':'');fb.textContent='';
+    fb.appendChild(h('p',{class:'fb-title',text:title}));
+    nodes.forEach(function(n){fb.appendChild(n);});
+    fb.removeAttribute('hidden');if(!replaying){fb.focus();}
+  }
+  function render(focus){
+    app.textContent='';
+    var s=state.step;
+    var titles=[C.s1.title,C.s2.title,C.s3.title,C.s4.title,C.s5.title,C.s6.title];
+    app.appendChild(h('p',{class:'progress-text',text:'Step '+(s+1)+' of '+TOTAL}));
+    app.appendChild(h('div',{class:'bar','aria-hidden':'true'},h('span',{style:'width:'+Math.round((s+1)/TOTAL*100)+'%'})));
+    var head=h('h2',{id:'qhead',tabindex:'-1',text:titles[s]});
+    app.appendChild(head);
+    [step1,step2,step3,step4,step5,step6][s]();
+    app.appendChild(nav());
+    if(focus){head.focus();}
+  }
+  function step1(){
+    var d=C.s1,st=state.s1;
+    app.appendChild(h('p',{class:'setup',text:d.setup}));
+    app.appendChild(dialogue(d.lines));
+    app.appendChild(h('p',{text:d.answerIntro}));
+    app.appendChild(dialogue([{who:'Maria',text:d.opener}]));
+    app.appendChild(h('p',{},h('strong',{text:d.task})));
+    var form=h('form',{novalidate:'novalidate'});
+    var radios=[];
+    d.parts.forEach(function(p,i){
+      var fs=h('fieldset',{class:'group'});
+      fs.appendChild(h('legend',{text:'Sentence '+(i+1)+': “'+p.text+'”'}));
+      var inl=h('div',{class:'inline'});
+      ['Past','Present','Future'].forEach(function(v){
+        var id='s1-'+i+'-'+v;
+        var inp=h('input',{type:'radio',name:'s1-'+i,id:id,value:v});
+        if(st.picks[i]===v){inp.checked=true;}
+        if(st.checked){inp.disabled=true;}
+        var row=h('div',{class:'opt'+(st.picks[i]===v?' selected':'')},inp,h('label',{for:id,text:v}));
+        inp.addEventListener('change',function(){st.picks[i]=v;Array.prototype.forEach.call(inl.children,function(c){c.classList.remove('selected');});row.classList.add('selected');err.textContent='';});
+        inl.appendChild(row);radios.push(inp);
+      });
+      fs.appendChild(inl);form.appendChild(fs);
+    });
+    var err=h('div',{class:'error',role:'alert'});
+    form.appendChild(err);
+    var fb=feedbackBox();
+    if(!st.checked){
+      var btn=h('button',{type:'submit',class:'primary',text:'Check my answers'});
+      form.appendChild(h('div',{class:'btnrow'},btn));
+    }
+    form.addEventListener('submit',function(ev){
+      ev.preventDefault();
+      if(st.picks.indexOf(null)!==-1){err.textContent='Please choose past, present, or future for every sentence first.';var first=form.querySelector('fieldset:not(:has(input:checked)) input');(first||radios[0]).focus();return;}
+      st.checked=true;
+      var n=0,items=[];
+      d.parts.forEach(function(p,i){var ok=st.picks[i]===p.ans;if(ok)n++;items.push(h('li',{},h('strong',{text:'Sentence '+(i+1)+': '+(ok?'Correct. ':'Not quite. ')}),(ok?'':'You chose '+st.picks[i]+'. ')+'It is '+p.ans+'. '+p.why));});
+      showFeedback(fb,n<d.parts.length,'You matched '+n+' of '+d.parts.length+' sentences.',[h('ul',{class:'result-list'},items.concat([])),h('p',{text:d.wrap})]);
+      form.querySelectorAll('input').forEach(function(i){i.disabled=true;});
+      var b=form.querySelector('button[type=submit]');if(b){b.parentNode.setAttribute('hidden','hidden');}
+    });
+    app.appendChild(form);app.appendChild(fb);
+    if(st.checked){replaying=true;form.dispatchEvent(new Event('submit',{cancelable:true}));replaying=false;}
+  }
+  function step2(){
+    var d=C.s2,st=state.s2;
+    app.appendChild(dialogue(d.lines));
+    app.appendChild(h('p',{},h('strong',{text:d.task})));
+    var form=h('form',{novalidate:'novalidate'});
+    var fs=h('fieldset',{class:'group'});
+    fs.appendChild(h('legend',{text:'STAR parts. Select all that apply.'}));
+    var boxes=[];
+    d.parts.forEach(function(p){
+      var id='s2-'+p.k;
+      var inp=h('input',{type:'checkbox',id:id,value:p.k});
+      if(st.sel[p.k]){inp.checked=true;}
+      if(st.checked){inp.disabled=true;}
+      var row=h('div',{class:'opt'+(st.sel[p.k]?' selected':'')},inp,h('label',{for:id},h('span',{class:'opt-label-text',text:p.name+': '+p.ask})));
+      inp.addEventListener('change',function(){st.sel[p.k]=inp.checked;row.classList.toggle('selected',inp.checked);});
+      fs.appendChild(row);boxes.push({inp:inp,row:row,p:p});
+    });
+    form.appendChild(fs);
+    var fb=feedbackBox();
+    if(!st.checked){form.appendChild(h('div',{class:'btnrow'},h('button',{type:'submit',class:'primary',text:'Check my answer'})));}
+    form.addEventListener('submit',function(ev){
+      ev.preventDefault();
+      st.checked=true;
+      var allOk=true,items=[];
+      boxes.forEach(function(b){
+        var picked=!!st.sel[b.p.k],ok=picked===b.p.missing;if(!ok)allOk=false;
+        b.inp.disabled=true;
+        b.row.classList.remove('selected');
+        b.row.classList.add(ok?'is-correct':'is-wrong');
+        b.row.querySelector('label').appendChild(h('span',{class:'badge'+(ok?'':' wrong'),text:ok?'✔ Your choice is correct':'✖ Your choice is not correct'}));
+        items.push(h('li',{},h('strong',{text:b.p.name+': '}),b.p.why));
+      });
+      showFeedback(fb,!allOk,allOk?'Correct. You found all three.':'Not quite. Here is what to look for.',[h('p',{text:'Task, Action, and Result are the missing or vague parts.'}),h('ul',{class:'result-list'},items)]);
+      var bb=form.querySelector('.btnrow');if(bb){bb.setAttribute('hidden','hidden');}
+    });
+    app.appendChild(form);app.appendChild(fb);
+    if(st.checked){replaying=true;form.dispatchEvent(new Event('submit',{cancelable:true}));replaying=false;}
+  }
+  function step3(){
+    var d=C.s3;
+    app.appendChild(h('p',{text:d.intro}));
+    d.segs.forEach(function(sg){app.appendChild(h('div',{class:'seg'},h('span',{class:'tagname',text:sg.name}),h('p',{text:sg.text})));});
+    app.appendChild(h('h3',{text:'What to notice',style:'font-size:1.125rem;color:var(--forest);margin:1rem 0 .35rem'}));
+    app.appendChild(h('ul',{class:'list'},d.notice.map(function(t){return h('li',{text:t});})));
+    app.appendChild(h('p',{text:d.note}));
+  }
+  function step4(){
+    var d=C.s4,st=state.s4;
+    app.appendChild(dialogue(d.lines));
+    app.appendChild(h('p',{},h('strong',{text:d.task})));
+    var form=h('form',{novalidate:'novalidate'});
+    var fs=h('fieldset',{class:'group'});
+    fs.appendChild(h('legend',{text:'Possible questions. Select all the good ones.'}));
+    var items=[];
+    d.opts.forEach(function(o,i){
+      var id='s4-'+i;
+      var inp=h('input',{type:'checkbox',id:id,value:String(i)});
+      if(st.sel[i]){inp.checked=true;}
+      if(st.checked){inp.disabled=true;}
+      var row=h('div',{class:'opt'+(st.sel[i]?' selected':'')},inp,h('label',{for:id},h('span',{class:'opt-label-text',text:o.text})));
+      inp.addEventListener('change',function(){st.sel[i]=inp.checked;row.classList.toggle('selected',inp.checked);err.textContent='';});
+      fs.appendChild(row);items.push({inp:inp,row:row,o:o,i:i});
+    });
+    form.appendChild(fs);
+    var err=h('div',{class:'error',role:'alert'});form.appendChild(err);
+    var fb=feedbackBox();
+    if(!st.checked){form.appendChild(h('div',{class:'btnrow'},h('button',{type:'submit',class:'primary',text:'Check my answers'})));}
+    form.addEventListener('submit',function(ev){
+      ev.preventDefault();
+      if(!st.checked&&st.sel.indexOf(true)===-1){err.textContent='Please select at least one question first.';items[0].inp.focus();return;}
+      st.checked=true;
+      var allOk=true,list=[];
+      items.forEach(function(it){
+        var picked=!!st.sel[it.i],ok=picked===it.o.good;if(!ok)allOk=false;
+        it.inp.disabled=true;it.row.classList.remove('selected');it.row.classList.add(ok?'is-correct':'is-wrong');
+        it.row.querySelector('label').appendChild(h('span',{class:'badge'+(ok?'':' wrong'),text:(it.o.good?'Good question to ask. ':'Better to skip. ')+(ok?'✔ Your choice is correct':'✖ Your choice is not correct')}));
+        list.push(h('li',{},h('strong',{text:(it.o.good?'Good: ':'Better to skip: ')+it.o.text+' '}),it.o.why));
+      });
+      showFeedback(fb,!allOk,allOk?'Correct.':'Not quite. Here is what to look for.',[h('ul',{class:'result-list'},list),h('p',{text:d.wrap})]);
+      var bb=form.querySelector('.btnrow');if(bb){bb.setAttribute('hidden','hidden');}
+    });
+    app.appendChild(form);app.appendChild(fb);
+    if(st.checked){replaying=true;form.dispatchEvent(new Event('submit',{cancelable:true}));replaying=false;}
+  }
+  function step5(){
+    var d=C.s5,st=state.s5;
+    app.appendChild(h('p',{text:d.intro}));
+    var sel=h('select',{id:'qsel'});
+    d.questions.forEach(function(q,i){var o=h('option',{value:String(i),text:q.q});if(i===st.q){o.selected=true;}sel.appendChild(o);});
+    app.appendChild(h('label',{class:'fieldlabel',for:'qsel',text:'Choose an interview question'}));
+    app.appendChild(sel);
+    var holder=h('div',{id:'fields'});app.appendChild(holder);
+    function drawFields(){
+      holder.textContent='';
+      var q=d.questions[st.q];
+      holder.appendChild(h('p',{style:'margin:1rem 0 .5rem'},h('strong',{text:'Plan your answer with: '}),q.kind+'.'));
+      var f=q.star?d.starFields:q.fields;
+      f.forEach(function(lab,j){
+        var id='note-'+st.q+'-'+j;var key=st.q+'-'+j;
+        holder.appendChild(h('label',{class:'fieldlabel',for:id,style:'margin-top:.75rem',text:lab}));
+        var ta=h('textarea',{id:id,rows:'3'});ta.value=st.notes[key]||'';
+        ta.addEventListener('input',function(){st.notes[key]=ta.value;});
+        holder.appendChild(ta);
+      });
+    }
+    sel.addEventListener('change',function(){st.q=parseInt(sel.value,10);drawFields();});
+    drawFields();
+    // copy notes
+    var copyBtn=h('button',{type:'button',class:'secondary',text:'Copy my notes'});
+    var status=h('p',{class:'status',role:'status'});
+    var manual=h('div',{class:'copybox',hidden:'hidden'});
+    copyBtn.addEventListener('click',function(){
+      var q=d.questions[st.q];var f=q.star?d.starFields:q.fields;
+      var txt=q.q+'\n';f.forEach(function(lab,j){txt+='\n'+lab+':\n'+(st.notes[st.q+'-'+j]||'')+'\n';});
+      function fallback(){
+        manual.textContent='';manual.removeAttribute('hidden');
+        manual.appendChild(h('label',{class:'fieldlabel',for:'manual-notes',text:'Select all of this text and copy it'}));
+        var ta=h('textarea',{id:'manual-notes',readonly:'readonly',rows:'6'});ta.value=txt;manual.appendChild(ta);
+        status.textContent='Automatic copy is not available here. Copy the text from the box below.';ta.focus();ta.select();
+      }
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(function(){manual.setAttribute('hidden','hidden');status.textContent='Your notes were copied.';},fallback);}
+      else{fallback();}
+    });
+    app.appendChild(h('div',{class:'btnrow'},copyBtn));app.appendChild(status);app.appendChild(manual);
+    // timer
+    var disp=h('span',{class:'time',role:'timer','aria-label':'Time remaining',text:fmt(timer.secs)});
+    var tStatus=h('span',{class:'status',role:'status',style:'margin:0'});
+    var start=h('button',{type:'button',class:'primary',text:'Start timer'});
+    var pause=h('button',{type:'button',class:'secondary',text:'Pause'});
+    var reset=h('button',{type:'button',class:'secondary',text:'Reset'});
+    function fmt(s){var m=Math.floor(s/60),r=s%60;return m+':'+(r<10?'0':'')+r;}
+    function tick(){timer.secs--;disp.textContent=fmt(timer.secs);if(timer.secs<=0){stopTimer();timer.secs=0;disp.textContent='0:00';tStatus.textContent='Time is up. You can finish your thought.';}}
+    start.addEventListener('click',function(){if(timer.running)return;if(timer.secs<=0){timer.secs=90;disp.textContent=fmt(90);}timer.running=true;tStatus.textContent='Timer started.';timer.id=setInterval(tick,1000);});
+    pause.addEventListener('click',function(){if(timer.running){stopTimer();tStatus.textContent='Timer paused.';}});
+    reset.addEventListener('click',function(){stopTimer();timer.secs=90;disp.textContent=fmt(90);tStatus.textContent='Timer reset to 1:30.';});
+    app.appendChild(h('div',{class:'timer'},disp,start,pause,reset,tStatus));
+    app.appendChild(h('p',{text:d.timerNote}));
+    // checklist
+    var fs=h('fieldset',{class:'group'});
+    fs.appendChild(h('legend',{text:'Self-check list. Check each one you did.'}));
+    d.checklist.forEach(function(t,i){
+      var id='chk-'+i;var inp=h('input',{type:'checkbox',id:id});if(st.checks[i]){inp.checked=true;}
+      var row=h('div',{class:'opt'+(st.checks[i]?' selected':'')},inp,h('label',{for:id,text:t}));
+      inp.addEventListener('change',function(){st.checks[i]=inp.checked;row.classList.toggle('selected',inp.checked);});
+      fs.appendChild(row);
+    });
+    app.appendChild(fs);
+  }
+  function step6(){
+    var d=C.s6;
+    app.appendChild(h('p',{},h('strong',{text:'In this activity:'})));
+    app.appendChild(h('ul',{class:'list'},d.points.map(function(t){return h('li',{text:t});})));
+    app.appendChild(h('p',{},h('strong',{text:'Next steps:'})));
+    app.appendChild(h('ul',{class:'list'},d.next.map(function(t){return h('li',{text:t});})));
+  }
+  render(false);
+})();
+</script>
+</body>
+</html>
